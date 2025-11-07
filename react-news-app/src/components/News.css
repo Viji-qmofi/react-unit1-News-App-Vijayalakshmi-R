@@ -55,8 +55,12 @@
       justify-content: center;
       align-items: center;
       row-gap: 1rem;
-      cursor: pointer;
-      
+      cursor: pointer;          
+}
+
+.user:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(95, 40, 98, 0.3);
 }
 
 .user img {
@@ -105,7 +109,7 @@
 }
 
 .news-section {
-      width: clamp(10rem, 43vw, 40%);
+      width: clamp(12rem, 45cqi, 45%);
       height: 100%;
       border-radius: 1rem;
 }
@@ -116,13 +120,75 @@
       background-color: #111214;
       border-radius: 1rem;
       margin-bottom: 2rem;
+      position: relative;
 }
+
+.headline-title {
+     width: 100%;
+     position: absolute; 
+     bottom: 0;
+     left: 0;
+     padding: 1rem 4rem 1rem 1rem;
+     font-family: "Babas Neue", sans-serif;
+     font-size: clamp(1.5rem, 1.8cqi, 3rem);
+     letter-spacing: 0.1rem;
+     color: #fff;
+     background-color: rgba(0,0,0,0.7);
+     border-radius: 0 0 1rem, 1rem;
+}
+
+.headline img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 1rem;
+      opacity: 0.4;
+}
+
 
 .news-grid {
       width: 100%;
-      height: 49%;
+      height: 50%;
       background-color: #111214;
       border-radius: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 1rem;
+      padding: 1.2rem;
+      justify-content: center;
+      align-items: center;
+}
+
+.news-grid-item {
+   width: 100%;
+   height: 100%;
+   min-height: 12rem;
+   border-radius: 1rem; 
+   position: relative;  
+}
+
+.news-grid-item h3{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 1rem 3rem 1rem 1rem;
+      font-size: 1.6rem;
+      font-weight: 300;
+      font-family: "Babas Neue", sans-serif;
+      line-height: 1.4rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      border-radius: 0 0 1rem 1rem;
+}
+
+.news-grid-item img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 1rem;
+      opacity: 0.5;
 }
 
 .weather-calendar {
