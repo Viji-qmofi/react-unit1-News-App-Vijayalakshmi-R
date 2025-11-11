@@ -108,8 +108,12 @@
     box-shadow: 0 6px 15px rgba(95, 40, 98, 0.3);
 }
 
+.nav-link:active {
+      color: #b95a0a;
+}
+
 .news-section {
-      width: clamp(12rem, 45cqi, 45%);
+      width: clamp(12rem, 45cqi, 50%);
       height: 100%;
       border-radius: 1rem;
 }
