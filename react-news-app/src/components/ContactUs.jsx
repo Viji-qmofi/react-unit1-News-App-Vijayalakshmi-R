@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import './ContactUs.css';
+import Footer from './Footer';
+import Header from './Header';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -44,23 +46,31 @@ const ContactUs = () => {
 
   if (submitted) {
     return (
+      <div className="news-contact">
       <div className="contact-wrapper">
+        <Header />
         <div className="contact-container">
           <h2 className="contact-title">Successfully Submitted!</h2>
           <p>Thank you for contacting us.</p>
           <button
-            className="submit-btn"
+            className="home-btn"
             onClick={() => navigate('/')}
           >
             Back to Home
           </button>
         </div>
+        <Footer />
+      </div>
       </div>
     );
   }
 
   return (
+    <main>
+    <div className="main-content">
+    <div className="news-contact">
     <div className="contact-wrapper">
+      <Header />
       <div className="contact-container">
         <h2 className="contact-title">Contact Us</h2>
         <form className="contact-form" onSubmit={handleSubmit}>
@@ -108,8 +118,14 @@ const ContactUs = () => {
             </button>
           </div>
         </form>
+        
       </div>
+     <Footer />
     </div>
+  </div> 
+  </div>
+  </main>
+    
   );
 };
 

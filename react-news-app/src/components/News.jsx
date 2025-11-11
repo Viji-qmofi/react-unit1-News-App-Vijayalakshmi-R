@@ -11,13 +11,14 @@ import nationImg from '../assets/images/nation.jpg'
 import scienceImg from '../assets/images/science.jpg'
 import sportsImg from '../assets/images/sports.jpg'
 import worldImg from '../assets/images/world.jpg'
+import Footer from './Footer'
+import Header from './Header'
 
 const News = () => {
   return (
+    <div className="news-app">
     <div className='news'>
-      <header className="news-header">
-            <h1 className="logo">MyPage - The daily source of wisdom</h1>
-      </header>
+      <Header />
       <div className="news-content">
             <div className="navbar">
                   <div className="user">
@@ -98,9 +99,9 @@ const News = () => {
               
 
       </div>
-      <footer className="news-footer">Footer
-      </footer>
+      <Footer />
     </div>
+    </div>  
   )
 }
 
