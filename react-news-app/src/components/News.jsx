@@ -34,7 +34,7 @@ const News = () => {
                         <a href="#" className='nav-link'>Sports</a>
                         <a href="#" className='nav-link'>Science</a>
                         <a href="#" className='nav-link'>Health</a>
-                        <Link to = {"/contactus"}>Contact Us</Link>                     
+                        <Link to = "/contactus">Contact Us</Link>                     
                     </div>          
                         
                   </nav>
