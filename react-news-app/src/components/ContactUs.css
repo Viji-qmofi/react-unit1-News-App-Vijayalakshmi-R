@@ -1,86 +1,236 @@
+/* === WRAPPER & LAYOUT === */
 .contact-wrapper {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
-.contact-container {
   width: 100%;
-  max-width: 400px;
-  padding: 2rem;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: "Babas Neue", sans-serif;
 }
 
+/* Centers the form in the middle of the page */
+.contact-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+/* === TITLE === */
 .contact-title {
-  color: #111214;
+  color: #bbb;
   text-align: center;
-  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-.contact-form .form-group {
-  margin-bottom: 1rem;
+/* === FORM === */
+.contact-form {
+  width: 100%;
+  max-width: 500px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form:hover {
+  transform: translateY(-4px);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
 }
 
+/* Label + Required mark */
 .contact-form label {
-  color: #111214;
-  margin-bottom: 0.3rem;
-  font-weight: bold;
+  color: #111;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
 }
 
 .required {
   color: red;
-  font-size: 0.8rem;
+  margin-left: 0.2rem;
 }
 
+/* Inputs and Textareas */
 .contact-form input,
 .contact-form textarea {
-  color: #111214;
-  padding: 0.5rem;
+  padding: 0.8rem 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 1rem;
+  color: #111;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #0078d4;
+  background-color: #fff;
+  box-shadow: 0 0 6px rgba(0, 120, 212, 0.2);
+}
+
+/* === BUTTONS === */
 .button-group {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .submit-btn,
 .reset-btn {
   flex: 1;
-  padding: 0.7rem;
+  padding: 0.8rem;
   font-size: 1rem;
-  border-radius: 4px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .submit-btn {
-  background-color: #007BFF;
+  background-color: #0078d4;
   color: white;
-  transition: background-color 0.3s;
 }
 
 .submit-btn:hover {
-  background-color: #0056b3;
+  background-color: #005fa3;
 }
 
 .reset-btn {
   background-color: #6c757d;
   color: white;
-  transition: background-color 0.3s;
 }
 
 .reset-btn:hover {
   background-color: #5a6268;
+}
+
+/* === SUCCESS MESSAGE PAGE === */
+.home-btn {
+  background-color: #0078d4;
+  color: #fff;
+  padding: 0.8rem 1.6rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.home-btn:hover {
+  background-color: #005fa3;
+}
+
+/* === FOOTER === */
+.news-footer {
+  background-color: #111214;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 4rem;
+  font-size: 0.9rem;
+  margin-top: auto;
+  width: 100%;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.news-footer p {
+  margin: 0;
+}
+
+.news-footer span {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================
+   📱 RESPONSIVE BREAKPOINTS
+   ========================================================== */
+
+/* === 1. MOBILE: up to 600px === */
+@media (max-width: 600px) {
+  .contact-wrapper {
+    background: linear-gradient(135deg, #eef3f8, #d9e4ec);
+  }
+  
+  .contact-container {
+    padding: 2rem 1rem;
+  }
+
+  .contact-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-form {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .submit-btn,
+  .reset-btn {
+    width: 100%;
+  }
+
+  .news-footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+}
+
+/* === 2. TABLET: 601px to 1024px === */
+@media (min-width: 601px) and (max-width: 1024px) {
+   .contact-wrapper {
+    background: linear-gradient(135deg, #517293, #d9e4ec);
+  }
+  
+  .contact-container {
+    padding: 3rem 2rem;
+  }
+
+  .contact-form {
+    max-width: 600px;
+    padding: 2rem;
+  }
+
+  .contact-title {
+    font-size: 1.8rem;
+  }
+
+  .news-footer {
+    padding: 1rem 2rem;
+  }
+}
+
+/* === 3. DESKTOP: above 1024px === */
+@media (min-width: 1025px) {
+  .contact-form {
+    max-width: 550px;
+  }
+
+  .contact-title {
+    font-size: 2rem;
+  }
+
+ 
 }
