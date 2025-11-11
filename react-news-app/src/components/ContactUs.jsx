@@ -51,7 +51,7 @@ const ContactUs = () => {
         <Header />
         <div className="contact-container">
           <h2 className="contact-title">Successfully Submitted!</h2>
-          <p>Thank you for contacting us.</p>
+          <p>Thank you for contacting us. You will hear from us in two business days.</p>
           <button
             className="home-btn"
             onClick={() => navigate('/')}
