@@ -46,9 +46,10 @@ const ContactUs = () => {
 
   if (submitted) {
     return (
-      <div className="news-contact">
-      <div className="contact-wrapper">
-        <Header />
+      
+    <main>
+      <div className="main-content">
+
         <div className="contact-container">
           <h2 className="contact-title">Successfully Submitted!</h2>
           <p>Thank you for contacting us. You will hear from us in two business days.</p>
@@ -59,18 +60,18 @@ const ContactUs = () => {
             Back to Home
           </button>
         </div>
-        <Footer />
-      </div>
-      </div>
+      </div>    
+    </main>    
+      
     );
   }
 
   return (
-    <main>
+    
     <div className="main-content">
-    <div className="news-contact">
-    <div className="contact-wrapper">
-      <Header />
+    
+    {/*<div className="contact-wrapper">*/}
+      
       <div className="contact-container">
         <h2 className="contact-title">Contact Us</h2>
         <p className="contact-subtext">
@@ -123,11 +124,11 @@ const ContactUs = () => {
         </form>
         
       </div>
-     <Footer />
+     
     </div>
-  </div> 
-  </div>
-  </main>
+   
+  
+  
     
   );
 };

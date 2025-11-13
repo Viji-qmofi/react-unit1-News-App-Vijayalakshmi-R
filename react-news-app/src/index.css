@@ -20,13 +20,19 @@ html{
   background: linear-gradient(to right, #b88efc, #6877f4);
   display: grid;
   place-items: center;
+   padding: 2rem; /* add breathing room */
 }
 
 .news-app{
   width: 90vw;
-  height: 95vmin;
+  height: 90vh;
+  display: flex;
+  flex-direction: column; /* make header, content, footer flow vertically */
   border-radius: 2rem;
   background-color: #060706;
+  overflow: hidden; /* keep inner scroll clean */
+  box-sizing: border-box;
+  /*padding: 0.6rem 0;          /* small vertical breathing space inside card */
 }
 
 .news-contact{

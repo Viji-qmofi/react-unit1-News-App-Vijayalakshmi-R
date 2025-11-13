@@ -1,6 +1,6 @@
 .news-header {
     width: 100%;
-    min-height: 7rem;
+   min-height: 7rem;
     background-image: url('../assets/images/news.jpg'); /* Define your colors */
 
     border-radius: 1rem 1rem 0 0;
@@ -12,7 +12,7 @@
 
 .logo{
       font-family: "Bebas Neue", sans-serif;
-      font-size: 5rem;
+      font-size: 4rem;
       color: #ddd;
       letter-spacing: 0.2rem;
 }

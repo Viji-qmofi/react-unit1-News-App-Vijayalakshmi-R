@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router'
 import './News.css'
 import Weather from './Weather'
@@ -15,10 +15,25 @@ import Footer from './Footer'
 import Header from './Header'
 
 const News = () => {
-  return (
-    <div className="news-app">
+      const [headline, setHeadline] = useState(null);
+      const [news, setNews] = useState([]);
+
+      useEffect(() => {
+            const fetchNews = async () => {
+                 const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&apikey=fbf5f36da38f7441eb62560033d46f86`
+                 const response = await fetch(url);
+                  if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`)
+                  }
+                 const data = await response.json();
+                 console.log(data); 
+
+            }; fetchNews();
+      },[]) 
+      return (
+    
     <div className='news'>
-      <Header />
+      
       <div className="news-content">
             <div className="navbar">
                   <div className="user">
@@ -99,9 +114,9 @@ const News = () => {
               
 
       </div>
-      <Footer />
+    <Footer />  
     </div>
-    </div>  
+      
   )
 }
 
