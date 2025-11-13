@@ -79,3 +79,13 @@
       font-size: 2rem;
       color: #ddd;
 } 
+
+@media (max-width: 768px) {
+  .weather {
+    height: 100%;
+  }
+
+  .search-location input {
+    width: 30rem;
+  }
+}
