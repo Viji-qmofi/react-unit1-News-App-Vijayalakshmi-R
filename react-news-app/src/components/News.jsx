@@ -37,55 +37,55 @@ const News = () => {
                         <a href="#" className='nav-link'>Health</a>
                         <Link to = "/contactus">Contact Us</Link>                     
                     </div>          
-                        
+                     
                   </nav>
                  
             </div>
             <div className="news-section">
                   <div className="headline">
-                        <img src={techImg} alt="Headline Image" />
+                        <img src={techImg} alt="Headline Image" loading="lazy" />
                         <h2 className="headline-title">
                               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, doloribus.
                         </h2>
                   </div>
                   <div className="news-grid">
                         <div className="news-grid-item">
-                              <img src={entertainmentImg} alt="News Image" />
+                              <img src={entertainmentImg} alt="News Image" loading="lazy" />
                               <h3>
                                     Lorem ipsum dolor sit amet.
                               </h3>
                         </div>
 
                         <div className="news-grid-item">
-                              <img src={healthImg} alt="News Image" />
+                              <img src={healthImg} alt="News Image" loading="lazy" />
                               <h3>
                                     Lorem ipsum dolor sit amet.
                               </h3>
                         </div> 
 
                         <div className="news-grid-item">
-                              <img src={nationImg} alt="News Image" />
+                              <img src={nationImg} alt="News Image" loading="lazy" />
                               <h3>
                                     Lorem ipsum dolor sit amet.
                               </h3>
                         </div> 
 
                         <div className="news-grid-item">
-                              <img src={scienceImg} alt="News Image" />
+                              <img src={scienceImg} alt="News Image" loading="lazy" />
                               <h3>
                                     Lorem ipsum dolor sit amet.
                               </h3>
                         </div> 
                         
                         <div className="news-grid-item">
-                              <img src={sportsImg} alt="News Image" />
+                              <img src={sportsImg} alt="News Image" loading="lazy"/>
                               <h3>
                                     Lorem ipsum dolor sit amet.
                               </h3>
                         </div> 
 
                         <div className="news-grid-item">
-                              <img src={worldImg} alt="News Image" />
+                              <img src={worldImg} alt="News Image" loading="lazy"/>
                               <h3>
                                     Lorem ipsum dolor sit amet.
                               </h3>

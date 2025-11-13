@@ -73,6 +73,9 @@ const ContactUs = () => {
       <Header />
       <div className="contact-container">
         <h2 className="contact-title">Contact Us</h2>
+        <p className="contact-subtext">
+          Have questions or feedback? We'd love to hear from you!
+        </p>
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>

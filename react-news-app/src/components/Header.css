@@ -16,3 +16,24 @@
       color: #ddd;
       letter-spacing: 0.2rem;
 }
+
+@media (max-width: 480px) {
+  .news-header {
+    padding: 1rem 2rem;
+  }
+
+   .logo {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px){
+    .news-header {
+        padding: 0;
+        margin-bottom: 2rem; /* less margin = moves up */
+    }
+
+      .logo {
+    font-size: 3rem;
+  }
+}

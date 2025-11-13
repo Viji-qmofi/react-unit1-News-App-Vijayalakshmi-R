@@ -1,14 +1,13 @@
 .news-footer {
       width: 100%;
       min-height: 5.5rem;
-      background-color: #111214; 
+      background-image: url('../assets/images/news.jpg'); /* Define your colors */
       border-radius: 0 0 1rem 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 4rem;
-      margin-top: auto;
-      margin-bottom: 0.5rem;      
+      padding: 0 2rem;
+            
 }
 
 .news-footer p {
@@ -20,4 +19,13 @@
 .news-footer p span {
       font-family: "Bebas Neue", sans-serif;
       font-size: 2rem;
+}
+
+@media (max-width: 480px){
+  .news-footer {
+    min-height: 8rem;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 1rem;
+  }
 }

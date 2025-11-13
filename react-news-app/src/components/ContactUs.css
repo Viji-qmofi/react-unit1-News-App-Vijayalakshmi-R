@@ -3,7 +3,9 @@
   width: 100%;
   min-height: 100%;
   display: flex;
+  border-radius: 4rem;
   flex-direction: column;
+  background: linear-gradient(135deg, #10131a, #1a1d25);
   font-family: "Babas Neue", sans-serif;
 }
 
@@ -25,6 +27,12 @@
   margin-bottom: 2rem;
   font-weight: 600;
   letter-spacing: 0.5px;
+}
+
+.contact-subtext {
+  text-align: center;
+  color: #bbb;
+  margin-bottom: 2rem;
 }
 
 /* === FORM === */
@@ -161,8 +169,8 @@
    📱 RESPONSIVE BREAKPOINTS
    ========================================================== */
 
-/* === 1. MOBILE: up to 600px === */
-@media (max-width: 600px) {
+/* === 1. MOBILE: up to 480px === */
+@media (max-width: 480px) {
   .contact-wrapper {
     background: linear-gradient(135deg, #eef3f8, #d9e4ec);
   }
@@ -199,7 +207,7 @@
 }
 
 /* === 2. TABLET: 601px to 1024px === */
-@media (min-width: 601px) and (max-width: 1024px) {
+@media (max-width: 768px) {
    .contact-wrapper {
     background: linear-gradient(135deg, #517293, #d9e4ec);
   }
@@ -223,7 +231,7 @@
 }
 
 /* === 3. DESKTOP: above 1024px === */
-@media (min-width: 1025px) {
+@media (max-width: 1024px) {
   .contact-form {
     max-width: 550px;
   }
