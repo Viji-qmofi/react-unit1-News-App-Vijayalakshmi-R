@@ -61,7 +61,7 @@ const News = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=fbf5f36da38f7441eb62560033d46f86`;
+        const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=fd5e0b213976ff502f9e0ef25a8c7b93`;
 
         const response = await fetch(url);
 
@@ -127,7 +127,7 @@ const News = () => {
             <h2 className="headline-title">{headline.title}</h2>
           </div>
         ) : (
-          <p>Loading...</p>
+          <div className="loader"></div>
         )}
 
         {/* ---------------- NEWS GRID ---------------- */}
