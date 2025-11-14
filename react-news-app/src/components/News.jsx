@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import "./News.css";
-
+import NewsModal from "./NewsModal";
 import Weather from "./Weather";
 import Calendar from "./Calendar";
 import userImg from "../assets/images/Viji_Profile.jpg";
 import noImg from "../assets/images/no-Img.png";
+import Loader from "./Loader";
 
 /* ----------------------------------
    CATEGORY NAMES FOR DISPLAY
@@ -127,7 +128,7 @@ const News = () => {
             <h2 className="headline-title">{headline.title}</h2>
           </div>
         ) : (
-          <div className="loader"></div>
+          <Loader />
         )}
 
         {/* ---------------- NEWS GRID ---------------- */}
@@ -140,7 +141,7 @@ const News = () => {
           ))}
         </div>
       </div>
-
+      <NewsModal />    
       {/* ---------------- WEATHER + CALENDAR ---------------- */}
       <div className="weather-calendar">
         <Weather />
