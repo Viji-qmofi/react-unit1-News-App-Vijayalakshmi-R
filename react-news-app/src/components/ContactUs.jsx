@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import './ContactUs.css';
-import Footer from './Footer';
-import Header from './Header';
+
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -46,89 +45,75 @@ const ContactUs = () => {
 
   if (submitted) {
     return (
-      <div className="news-contact">
-      <div className="contact-wrapper">
-        <Header />
-        <div className="contact-container">
-          <h2 className="contact-title">Successfully Submitted!</h2>
-          <p>Thank you for contacting us. You will hear from us in two business days.</p>
-          <button
-            className="home-btn"
-            onClick={() => navigate('/')}
-          >
-            Back to Home
-          </button>
-        </div>
-        <Footer />
-      </div>
+      <div className="contact-container">
+        <h2 className="contact-title">Successfully Submitted!</h2>
+        <p>Thank you for contacting us. You will hear from us in two business days.</p>
+        <button
+          className="home-btn"
+          onClick={() => navigate('/')}
+        >
+          Back to Home
+        </button>
       </div>
     );
   }
 
   return (
-    <main>
-    <div className="main-content">
-    <div className="news-contact">
-    <div className="contact-wrapper">
-      <Header />
-      <div className="contact-container">
-        <h2 className="contact-title">Contact Us</h2>
-        <p className="contact-subtext">
-          Have questions or feedback? We'd love to hear from you!
-        </p>
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>
-              Name <span className="required">*</span>
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              ref={nameRef}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>
-              Email <span className="required">*</span>
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>
-              Message <span className="required">*</span>
-            </label>
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows="5"
-              required
-            ></textarea>
-          </div>
-          <div className="button-group">
-            <button type="submit" className="submit-btn">Submit</button>
-            <button type="button" className="reset-btn" onClick={handleReset}>
-              Reset
-            </button>
-          </div>
-        </form>
-        
-      </div>
-     <Footer />
+
+    <div className="contact-container">
+      <h2 className="contact-title">Contact Us</h2>
+      <p className="contact-subtext">
+        Have questions or feedback? We'd love to hear from you!
+      </p>
+      <form className="contact-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>
+            Name <span className="required">*</span>
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            ref={nameRef}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>
+            Email <span className="required">*</span>
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>
+            Message <span className="required">*</span>
+          </label>
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            rows="5"
+            required
+          ></textarea>
+        </div>
+        <div className="button-group">
+          <button type="submit" className="submit-btn">Submit</button>
+          <button type="button" className="reset-btn" onClick={handleReset}>
+            Reset
+          </button>
+        </div>
+      </form>
+
     </div>
-  </div> 
-  </div>
-  </main>
-    
+
+
   );
 };
 

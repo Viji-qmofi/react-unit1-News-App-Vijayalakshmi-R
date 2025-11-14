@@ -1,13 +1,4 @@
-header,
-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #1e323c;
-    color: white;
-    width: 100%;
-    padding: 15px clamp(20px, 4vw, 30px) 20px;
-}
+
 
 main {
     flex: 1;
