@@ -6,14 +6,26 @@ import Calendar from './Calendar'
 import userImg from '../assets/images/Viji_Profile.jpg'
 import noImg from '../assets/images/no-Img.png'
 
+const categories = [
+     'home',
+     'world',
+     'business',
+     'technology',
+     'entertainment',
+     'sports',
+     'science',
+     'health' 
+]
+
 const News = () => {
       const [headline, setHeadline] = useState(null);
       const [news, setNews] = useState([]);
+      const [selectedCategory, setSelectedCategory] = useState('general')
 
  useEffect(() => {
   const fetchNews = async () => {
     try {
-      const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&apikey=e594a198a130f391ac23bccfbced3fa8`;
+      const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=e594a198a130f391ac23bccfbced3fa8`;
 
       const response = await fetch(url);
 
@@ -34,7 +46,7 @@ const News = () => {
       setNews(fetchedNews.slice(1, 7));
       {/*console.log(fetchedNews.slice(1, 7));*/}
     } catch (error) {
-      console.error("Error fetching news:", error);
+      console.error("Error fetching news:", error);/*Error 439 */
       setHeadline({ 
         title: "API Rate Limit Exceeded",
         image: "https://via.placeholder.com/600x400?text=Rate+Limit" 
@@ -44,8 +56,12 @@ const News = () => {
   };
 
   fetchNews();
-}, []);
+}, [selectedCategory]);
 
+const handleCategoryClick = (e, category) => {
+      e.preventDefault();
+      setSelectedCategory(category);
+}
       
       return (
             <div className="news-content">
@@ -56,14 +72,17 @@ const News = () => {
                         </div>
                         <nav className="categories">
                               <div className="nav-links">
-                                    <a href="#" className='nav-link'>Home</a>
-                                    <a href="#" className='nav-link'>World</a>
-                                    <a href="#" className='nav-link'>Business</a>
-                                    <a href="#" className='nav-link'>Technology</a>
-                                    <a href="#" className='nav-link'>Entertainment</a>
-                                    <a href="#" className='nav-link'>Sports</a>
-                                    <a href="#" className='nav-link'>Science</a>
-                                    <a href="#" className='nav-link'>Health</a>
+                                    {categories.map((category) => (
+                                          <a
+                                          href='#'
+                                          key={category}
+                                          className='nav-link'
+                                          onClick={(e) => handleCategoryClick(e, category)}
+                                          >
+                                          {category}      
+                                          </a>
+                                    ))}
+                                    
                                     <Link to="/contactus">Contact Us</Link>
                               </div>
 

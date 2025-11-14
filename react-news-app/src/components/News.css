@@ -88,6 +88,8 @@
 
 .nav-link:hover {
     transform: scale(1.05);
+    color: #b95a0a;
+    font-size: 1.6rem;
     box-shadow: 0 6px 15px rgba(95, 40, 98, 0.3);
 }
 
