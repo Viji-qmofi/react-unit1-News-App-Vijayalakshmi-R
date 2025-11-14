@@ -17,6 +17,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<News />} />
+            <Route path="/categories/:category" element={<News />} />
             <Route path="/contactus" element={<ContactUs />} />
           </Routes>
           <Footer />
