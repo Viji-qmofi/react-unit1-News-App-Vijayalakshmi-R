@@ -6,7 +6,7 @@ import Weather from "./Weather";
 import Calendar from "./Calendar";
 import userImg from "../assets/images/Viji_Profile.jpg";
 import noImg from "../assets/images/no-Img.png";
-import Loader from "./Loader";
+import Loader from "./Loader"
 
 /* ----------------------------------
    CATEGORY NAMES FOR DISPLAY
@@ -41,9 +41,18 @@ const categoryMap = {
 const News = () => {
   const { category } = useParams(); // reads /categories/:category
   const [selectedCategory, setSelectedCategory] = useState("general");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState(null);
 
   const [headline, setHeadline] = useState(null);
   const [news, setNews] = useState([]);
+
+  const handleArticleClick = (article) => {
+      setSelectedArticle(article);
+      setShowModal(true);
+      {/*console.log(article);*/}
+  }
+
 
   /* ----------------------------------
      UPDATE CATEGORY WHEN URL CHANGES
@@ -123,7 +132,7 @@ const News = () => {
       {/* ---------------- HEADLINE ---------------- */}
       <div className="news-section">
         {headline ? (
-          <div className="headline">
+          <div className="headline" onClick={() => handleArticleClick(headline)}>
             <img src={headline.image || noImg} alt={headline.title} loading="lazy" />
             <h2 className="headline-title">{headline.title}</h2>
           </div>
@@ -134,14 +143,16 @@ const News = () => {
         {/* ---------------- NEWS GRID ---------------- */}
         <div className="news-grid">
           {news.map((article, index) => (
-            <div key={index} className="news-grid-item">
+            <div key={index} className="news-grid-item" onClick={() => handleArticleClick(article)}>
               <img src={article.image || noImg} alt={article.title} loading="lazy" />
               <h3>{article.title}</h3>
             </div>
           ))}
         </div>
       </div>
-      <NewsModal />    
+
+      <NewsModal show={showModal} article={selectedArticle} onClose={() => setShowModal(false)} /> 
+
       {/* ---------------- WEATHER + CALENDAR ---------------- */}
       <div className="weather-calendar">
         <Weather />
