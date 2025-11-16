@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import "./News.css";
 import Modal from "./Modal";
+import BookMarks from "./BookMarks";
 import Weather from "./Weather";
 import Calendar from "./Calendar";
 import userImg from "../assets/images/Viji_Profile.jpg";
@@ -39,13 +41,18 @@ const categoryMap = {
 };
 
 const News = () => {
+      const [headline, setHeadline] = useState(null);
+      const [news, setNews] = useState([]);
       const { category } = useParams(); // reads /categories/:category
       const [selectedCategory, setSelectedCategory] = useState("general");
       const [showModal, setShowModal] = useState(false);
       const [selectedArticle, setSelectedArticle] = useState(null);
+      const [bookmarks, setBookmarks] = useState([])
+      const [showBookmarksModal, setShowBookmarksModal] = useState(false)
+      const navigate = useNavigate();
+      const location = useLocation();
 
-      const [headline, setHeadline] = useState(null);
-      const [news, setNews] = useState([]);
+
 
       const handleOpenModal = (article) => {
             setSelectedArticle(article);
@@ -56,6 +63,16 @@ const News = () => {
             setShowModal(false);
             setSelectedArticle(null);
       };
+
+      const handleBookmarkClick = (article) => {
+            setBookmarks((prevBookmarks) => {
+                  const updatedBookmarks = prevBookmarks.find((bookmark) => bookmark.title === article.title)
+                        ? prevBookmarks.filter((bookmark) => bookmark.title !== article.title)
+                        : [...prevBookmarks, article];
+                  localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
+                  return updatedBookmarks;
+            })
+      }
 
 
       /* ----------------------------------
@@ -88,6 +105,9 @@ const News = () => {
                               if (!article.image) article.image = noImg;
                         });
 
+                        const savedBookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+                        setBookmarks(savedBookmarks);
+
                         setHeadline(fetchedNews[0] || null);
                         setNews(fetchedNews.slice(1, 7) || []);
                   } catch (error) {
@@ -104,6 +124,13 @@ const News = () => {
 
             fetchNews();
       }, [selectedCategory]);
+
+      useEffect(() => {
+            if (location.pathname === "/bookmarks") {
+            setShowBookmarksModal(true);
+            }
+      }, [location.pathname]);
+
 
       return (
             <div className="news-content">
@@ -126,6 +153,10 @@ const News = () => {
                                                 {cat === "home" ? "Home" : cat}
                                           </Link>
                                     ))}
+                                    <Link to="/bookmarks" className="nav-link">
+                                          Bookmarks <i className="fa-solid fa-bookmark"></i>
+                                    </Link>
+
 
                                     <Link to="/contactus" className="nav-link">Contact Us</Link>
                               </div>
@@ -137,7 +168,20 @@ const News = () => {
                         {headline ? (
                               <div className="headline" onClick={() => handleOpenModal(headline)}>
                                     <img src={headline.image || noImg} alt={headline.title} loading="lazy" />
-                                    <h2 className="headline-title">{headline.title}</h2>
+                                    <h2 className="headline-title">{headline.title}
+                                          <i
+                                                className={`${
+                                                bookmarks.some((bookmark) => bookmark.title === headline.title)
+                                                ? 'fa-solid'
+                                                : 'fa-regular'
+                                                } fa-bookmark bookmark`}
+                                                onClick={(e) => {
+                                                e.stopPropagation()
+                                                handleBookmarkClick(headline)
+                                                }}
+                                          >                                               
+                                          </i>
+                                    </h2>
                               </div>
                         ) : (
                               <Loader />
@@ -148,7 +192,19 @@ const News = () => {
                               {news.map((article, index) => (
                                     <div key={index} className="news-grid-item" onClick={() => handleOpenModal(article)}>
                                           <img src={article.image || noImg} alt={article.title} loading="lazy" />
-                                          <h3>{article.title}</h3>
+                                          <h3>{article.title}
+                                                <i
+                                                      className={`${
+                                                            bookmarks.some((bookmark) => bookmark.title === article.title)
+                                                                  ? 'fa-solid'
+                                                                  : 'fa-regular'
+                                                      } fa-bookmark bookmark`}
+                                                      onClick={(e) => {
+                                                      e.stopPropagation();
+                                                      handleBookmarkClick(article);
+                                                      }}
+                                                ></i>
+                                          </h3>
                                     </div>
                               ))}
                         </div>
@@ -190,13 +246,25 @@ const News = () => {
                         ) : null}
                   </Modal>
 
+                 <BookMarks
+                        show={showBookmarksModal}
+                        bookmarks={bookmarks}
+                        onClose={() => {
+                              setShowBookmarksModal(false);
+                              
+                        }}
+                        onSelectArticle={handleOpenModal}
+                        onDeleteBookmark={handleBookmarkClick}
+                  />
 
 
                   {/* ---------------- WEATHER + CALENDAR ---------------- */}
-                  <div className="weather-calendar">
+                <div className="weather-calendar">
                         <Weather />
                         <Calendar />
-                  </div>
+                 </div>
+
+                
             </div>
       );
 };
