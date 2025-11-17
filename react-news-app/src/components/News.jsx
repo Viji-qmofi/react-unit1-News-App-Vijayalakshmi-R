@@ -49,6 +49,7 @@ const News = () => {
       const [selectedArticle, setSelectedArticle] = useState(null);
       const [bookmarks, setBookmarks] = useState([])
       const [showBookmarksModal, setShowBookmarksModal] = useState(false)
+      const [lastPage, setLastPage] = useState("/categories/home");
       const navigate = useNavigate();
       const location = useLocation();
 
@@ -56,7 +57,7 @@ const News = () => {
 
       const handleOpenModal = (article) => {
             setSelectedArticle(article);
-            {/*console.log(article);*/}
+            {/*console.log(article);*/ }
             setShowModal(true);
       };
 
@@ -64,6 +65,11 @@ const News = () => {
             setShowModal(false);
             setSelectedArticle(null);
       };
+
+      const handleArticleClick = (article) => {
+            setSelectedArticle(article)
+            setShowModal(true)
+      }
 
       const handleBookmarkClick = (article) => {
             setBookmarks((prevBookmarks) => {
@@ -126,11 +132,18 @@ const News = () => {
             fetchNews();
       }, [selectedCategory]);
 
+      // Track the last non-bookmarks page the user visited
       useEffect(() => {
-            if (location.pathname === "/bookmarks") {
-            setShowBookmarksModal(true);
+            if (location.pathname !== "/bookmarks") {
+                  setLastPage(location.pathname);
             }
       }, [location.pathname]);
+
+      // Show/hide Bookmarks modal based on route
+      useEffect(() => {
+            setShowBookmarksModal(location.pathname === "/bookmarks");
+      }, [location.pathname]);
+
 
 
       return (
@@ -171,16 +184,15 @@ const News = () => {
                                     <img src={headline.image || noImg} alt={headline.title} loading="lazy" />
                                     <h2 className="headline-title">{headline.title}
                                           <i
-                                                className={`${
-                                                bookmarks.some((bookmark) => bookmark.title === headline.title)
-                                                ? 'fa-solid'
-                                                : 'fa-regular'
-                                                } fa-bookmark bookmark`}
+                                                className={`${bookmarks.some((bookmark) => bookmark.title === headline.title)
+                                                      ? 'fa-solid'
+                                                      : 'fa-regular'
+                                                      } fa-bookmark bookmark`}
                                                 onClick={(e) => {
-                                                e.stopPropagation()
-                                                handleBookmarkClick(headline)
+                                                      e.stopPropagation()
+                                                      handleBookmarkClick(headline)
                                                 }}
-                                          >                                               
+                                          >
                                           </i>
                                     </h2>
                               </div>
@@ -195,14 +207,13 @@ const News = () => {
                                           <img src={article.image || noImg} alt={article.title} loading="lazy" />
                                           <h3>{article.title}
                                                 <i
-                                                      className={`${
-                                                            bookmarks.some((bookmark) => bookmark.title === article.title)
-                                                                  ? 'fa-solid'
-                                                                  : 'fa-regular'
-                                                      } fa-bookmark bookmark`}
+                                                      className={`${bookmarks.some((bookmark) => bookmark.title === article.title)
+                                                            ? 'fa-solid'
+                                                            : 'fa-regular'
+                                                            } fa-bookmark bookmark`}
                                                       onClick={(e) => {
-                                                      e.stopPropagation();
-                                                      handleBookmarkClick(article);
+                                                            e.stopPropagation();
+                                                            handleBookmarkClick(article);
                                                       }}
                                                 ></i>
                                           </h3>
@@ -211,9 +222,9 @@ const News = () => {
                         </div>
                   </div>
                   <Modal show={showModal} onClose={handleCloseModal}>
-                        
+
                         {selectedArticle ? (
-                              
+
                               <>
                                     <img src={selectedArticle.image || noImg} alt={selectedArticle.title} className="modal-image" />
 
@@ -232,10 +243,18 @@ const News = () => {
                                                       hour: "2-digit",
                                                       minute: "2-digit",
                                                 })
-                                                : ""}
+                                                :
+                                                ""
+                                          }
                                     </p>
 
-                                    <p className="modal-content-text">{selectedArticle.content ?? selectedArticle.description ?? ""}</p>
+                                    <p className="modal-content-text">
+                                          {
+                                                selectedArticle.content ??
+                                                selectedArticle.description ??
+                                                "No content available for this article."
+                                          }
+                                    </p>
 
                                     <a
                                           href={selectedArticle.url}
@@ -249,25 +268,33 @@ const News = () => {
                         ) : null}
                   </Modal>
 
-                 <BookMarks
+                  <BookMarks
                         show={showBookmarksModal}
                         bookmarks={bookmarks}
                         onClose={() => {
-                              setShowBookmarksModal(false);
-                              
+                              navigate(lastPage);   // ⬅ Return to last visited category
                         }}
-                        onSelectArticle={handleOpenModal}
+                        onSelectArticle={(article) => {
+                              // 1. Close Bookmarks modal (navigate back to last page)
+                              navigate(lastPage);
+
+                              // 2. Wait for route change + modal unmount, then open article modal
+                              setTimeout(() => {
+                                    handleOpenModal(article);
+                              }, 50);
+                        }}
                         onDeleteBookmark={handleBookmarkClick}
                   />
 
 
+
                   {/* ---------------- WEATHER + CALENDAR ---------------- */}
-                <div className="weather-calendar">
+                  <div className="weather-calendar">
                         <Weather />
                         <Calendar />
-                 </div>
+                  </div>
 
-                
+
             </div>
       );
 };

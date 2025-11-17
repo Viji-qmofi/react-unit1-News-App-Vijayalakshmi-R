@@ -4,24 +4,27 @@ import Modal from "./Modal";
 import noImg from "../assets/images/no-Img.png";
 import "./Bookmarks.css";
 
-const BookMarks = ({ show, bookmarks, onClose }) => {
+const BookMarks = ({ show, bookmarks, onClose, onSelectArticle, onDeleteBookmark }) => {
   return (
     <Modal show={show} onClose={onClose}>
       <h2 className="bookmarks-heading">Bookmarked News</h2>
 
       <div className="bookmarks-list">
-        {bookmarks.map((article, index) => (
-          <a
-            key={index}
-            href={article.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bookmark-item"
-          >
-            <img src={article.image || noImg} alt={article.title} />
-            <h3>{article.title}</h3>
-          </a>
-        ))}
+            {bookmarks.map((article, index) => (
+                  <div className="bookmark-item" key={index} onClick={() => onSelectArticle(article)}>
+                        <img src={article.image || noImg} alt={article.title} />
+                        <h3>{article.title}</h3>
+                        <span
+                              className="delete-button"
+                              onClick={(e) => {
+                              e.stopPropagation()
+                              onDeleteBookmark(article)
+                              }}
+                        >
+                              <i className="fa-regular fa-circle-xmark"></i>
+                        </span>
+                  </div>
+            ))}
       </div>
     </Modal>
   );
