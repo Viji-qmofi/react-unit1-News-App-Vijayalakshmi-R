@@ -56,6 +56,7 @@ const News = () => {
 
       const handleOpenModal = (article) => {
             setSelectedArticle(article);
+            {/*console.log(article);*/}
             setShowModal(true);
       };
 
@@ -210,7 +211,9 @@ const News = () => {
                         </div>
                   </div>
                   <Modal show={showModal} onClose={handleCloseModal}>
+                        
                         {selectedArticle ? (
+                              
                               <>
                                     <img src={selectedArticle.image || noImg} alt={selectedArticle.title} className="modal-image" />
 
