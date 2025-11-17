@@ -31,14 +31,14 @@
 }
 
 .read-more-link {
-  width: 15rem;
+  width: 12rem;
   display: inline-block;
   background: linear-gradient(to right, #b88efc, #6877f4);
-  margin-top: 2rem;
+  margin-top: 1.4rem;
   padding: 1rem 2rem;
   color: #fff;
   border-radius: 5rem;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
