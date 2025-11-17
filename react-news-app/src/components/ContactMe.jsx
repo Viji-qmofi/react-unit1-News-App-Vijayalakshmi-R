@@ -16,19 +16,18 @@ const dropdownOptions = [
 ];
 
 let initialData = {
-  name: '',
-  email: '',
-  topic: "",
-  message: ''
+    name: '',
+    email: '',
+    topic: "",
+    message: ''    
 };
 
 let errorMessages = {
-  name: "Name is required.",
-  email: "Email is required.",
-  topic: "Please select a topic.",
-  message: "Message is required."
+    firstNameRequired: 'First name is required.',
+    lastNameRequired: 'Last name is required.',
+    emailRequired: 'Email is required.',
+    numberOfGuestsRequired: 'At least 1 guest required.',
 };
-
 
 
 
@@ -50,35 +49,32 @@ const ContactUs = () => {
   }, []);
 
   const isValid = () => {
-    return (
-      formData.name.trim() !== '' &&
-      formData.email.trim() !== '' &&
-      formData.topic.trim() !== '' &&
-      formData.message.trim() !== ''
-    );
-  };
+        return data.firstName && data.lastName && data.email && data.numberOfGuests;
+    };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isValid()) {
-      setHasErrors(true);
-      return;
-    }
-    // Eventually: submit data to back end to save to database
-    setSubmitted(true);
-
+            setHasErrors(true);
+        } else {
+            // Eventually: submit data to back end to save to database
+            setSubmitted(true);
+        }
     console.log('Form submitted:', formData);
-
+    
   };
 
   const handleReset = () => {
-    setFormData({ ...initialData });
-    setHasErrors(false);
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
     if (nameRef.current) {
       nameRef.current.focus();
     }
@@ -89,12 +85,12 @@ const ContactUs = () => {
       <div className="contact-container">
         <h2 className="contact-title">Successfully Submitted!</h2>
         <p>Thank you for contacting us. You will hear from us in two business days.</p>
-        
-        <Button
-            label="Back to Home"
-            className="home-btn"
-            handleClick={() => navigate('/')}
-        />
+        <button
+          className="home-btn"
+          onClick={() => navigate('/')}
+        >
+          Back to Home
+        </button>
       </div>
     );
   }
@@ -109,82 +105,81 @@ const ContactUs = () => {
       <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <Input
-            id="id"
-            name="name"
+            id="name"
             label="Name"
-            type="text"
             value={formData.name}
             handleChange={handleChange}
             ref={nameRef}
             required
           />
-          <InputErrorMessage
-            hasError={hasErrors && formData.name.trim() === ''}
-            msg={errorMessages.name}
-          />
-
+           <InputErrorMessage
+                  hasError={hasErrors && formData.name === ''}
+                  msg={errorMessages['Name Required']}
+            />
         </div>
         <div className="form-group">
           <Input
             id="email"
-            name="email"
             label="Email"
             type="email"
             value={formData.email}
             handleChange={handleChange}
             required
           />
-          <InputErrorMessage
-            hasError={hasErrors && formData.email === ''}
-            msg={errorMessages.email}
-          />
+           <InputErrorMessage
+                  hasError={hasErrors && formData.email === ''}
+                  msg={errorMessages['Email Required']}
+            />
         </div>
 
         <div className="form-group">
           <Select
-            label="Topic"
-            name="topic"
-            value={formData.topic}
-            onChange={handleChange}
-            options={dropdownOptions}
-            required
-          />
-          <InputErrorMessage
-            hasError={hasErrors && formData.topic === ''}
-            msg={errorMessages.topic}
-          />
+          label="Topic"
+          name="topic"
+          value={formData.topic}
+          onChange={handleChange}
+          options={dropdownOptions}
+          required
+        />
+        <InputErrorMessage
+                  hasError={hasErrors && formData.topic === ''}
+                  msg={errorMessages['Select a topic']}
+            />
         </div>
 
         <div className="form-group">
           <Textarea
-            label="Message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows="5"
-            required
-          />
+          label="Message"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          rows="5"
+          required
+        />
           <InputErrorMessage
-            hasError={hasErrors && formData.message === ''}
-            msg={errorMessages.message}
-          />
+                  hasError={hasErrors && formData.message === ''}
+                  msg={errorMessages['Message Required']}
+            />
         </div>
         <div className="button-group">
-          <Button
-            id="Submit"
-            type="submit"
-            label="Submit"
-            className="submit-btn"
-
-          />
-          <Button
-            id='reset'
-            type="button"
-            label="Reset"
-            className="reset-btn"
-            handleClick={handleReset}
-          />
-
+            <Button
+                    id="Submit"
+                    type="submit"
+                    label="Submit"
+                    className="submit-btn"
+                    handleClick={handleSubmit}
+            />
+            <Button
+                    id='reset'
+                    type="button"
+                    label="Reset"
+                    className="reset-btn"
+                    handleClick={handleReset}
+                />
+          <button type="submit" className="submit-btn">Submit</button>
+          <button type="button" className="reset-btn" onClick={handleReset}>
+            Reset
+          </button>
         </div>
       </form>
 
