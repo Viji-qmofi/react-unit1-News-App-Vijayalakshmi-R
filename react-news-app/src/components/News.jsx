@@ -108,7 +108,7 @@ const News = () => {
       useEffect(() => {
             const fetchNews = async () => {
                   try {
-                        const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=e594a198a130f391ac23bccfbced3fa8`;
+                        const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=fd5e0b213976ff502f9e0ef25a8c7b93`;
 
                         const response = await fetch(url);
 
