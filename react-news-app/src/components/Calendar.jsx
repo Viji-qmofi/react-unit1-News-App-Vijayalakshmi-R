@@ -19,7 +19,7 @@ const Calendar = () => {
     'December',
   ]
 
-   // Today's real date (used for highlighting current day)
+  // Today's real date (used for highlighting current day)
   const currentDate = new Date()
 
   // Track the month & year currently being displayed
@@ -34,7 +34,7 @@ const Calendar = () => {
 
 
   {/*console.log(currentMonth, currentYear, daysInMonth, firstDayOfMonth)*/ }
-  
+
 
   // Go to previous month (if January → go to December and reduce year)
   const prevMonth = () => {
@@ -59,39 +59,36 @@ const Calendar = () => {
           <i className="bx bx-chevron-right" onClick={nextMonth}></i>
         </div>
       </div>
-      
+
       {/* Display weekday names */}
       <div className="weekdays">
         {daysOfWeek.map((day) => (
           <span key={day}>{day}</span>
         ))}
       </div>
-      
-      {/* Display all days, starting with empty slots before day 1 */}
+
       <div className="days">
-        {[...Array(firstDayOfMonth).keys()].map((_, index) => (
-          <span key={`empty-${index}`}></span>
+        {/* Empty boxes before the 1st day */}
+        {Array.from({ length: firstDayOfMonth }, (_, i) => (
+          <span key={`empty-${i}`}></span>
         ))}
 
-        
-        {/* Actual days of the month */}
-        {[...Array(daysInMonth).keys()].map((day) => (
-          <span
-            key={day + 1}
-            
-            // Highlight today's date if month & year match
-            className={
-              day + 1 === currentDate.getDate() &&
-                currentMonth === currentDate.getMonth() &&
-                currentYear === currentDate.getFullYear()
-                ? 'current-day'
-                : ''
-            }
-          >
-            {day + 1}
-          </span>
-        ))}
+        {/* Actual days */}
+        {Array.from({ length: daysInMonth }, (_, i) => {
+          const dayNumber = i + 1;
+          const isToday =
+            dayNumber === currentDate.getDate() &&
+            currentMonth === currentDate.getMonth() &&
+            currentYear === currentDate.getFullYear();
+
+          return (
+            <span key={dayNumber} className={isToday ? 'current-day' : ''}>
+              {dayNumber}
+            </span>
+          );
+        })}
       </div>
+
     </div>
   )
 }
