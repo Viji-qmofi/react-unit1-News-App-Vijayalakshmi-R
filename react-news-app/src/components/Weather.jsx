@@ -4,6 +4,7 @@ import Input from './Input';
 
 
 
+
 const Weather = () => {
   const [data, setData] = useState({});
   const [location, setLocation] = useState('');
@@ -139,6 +140,7 @@ const handleInputChange = (e) => {
         <div className="temp">{data.main ? `${Math.floor(data.main.temp)}°` : null}</div>
         </div>
       )}
+      
     </div>
   )
 }
