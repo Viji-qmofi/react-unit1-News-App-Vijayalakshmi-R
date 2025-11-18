@@ -5,7 +5,7 @@
   display: flex;
   border-radius: 4rem;
   flex-direction: column;
-  background: linear-gradient(135deg, #10131a, #1a1d25);
+  background: linear-gradient(135deg, #787a7e, #e9ebf1);
   font-family: "Babas Neue", sans-serif;
 }
 
@@ -25,7 +25,7 @@
   color: #bbb;
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
@@ -41,7 +41,7 @@
   width: 100%;
   max-width: 500px;
   
-  background: #ffffff;
+  background-color: #111214;
   border-radius: 12px;
   padding: 2.5rem 2rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -52,15 +52,16 @@
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.3rem;
   display: flex;
   flex-direction: column;
 }
 
 /* Label + Required mark */
 .contact-form label {
-  color: #111;
-  font-weight: 600;
+  color: #ddd;
+  font-family: "Babas Neue", sans-serif;
+  font-weight: 500;
   margin-bottom: 0.4rem;
 }
 

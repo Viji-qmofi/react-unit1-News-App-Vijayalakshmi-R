@@ -1,4 +1,4 @@
-const Textarea = ({ label, name, value, onChange, rows, required }) => {
+const Textarea = ({ label, name, value, onChange, placeholder, rows, required }) => {
   return (
     <>
       <label htmlFor={name}>
@@ -10,6 +10,7 @@ const Textarea = ({ label, name, value, onChange, rows, required }) => {
         name={name}
         rows={rows || 5}
         value={value}
+        placeholder={placeholder}
         onChange={onChange}
         required={required}
       ></textarea>

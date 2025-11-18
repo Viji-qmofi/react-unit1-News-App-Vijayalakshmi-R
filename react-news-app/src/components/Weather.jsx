@@ -1,10 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Weather.css'
+import Input from './Input';
+
+
 
 const Weather = () => {
   const [data, setData] = useState({});
   const [location, setLocation] = useState('');
+  const inputRef = useRef(null);
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
+ 
+  
   useEffect(() => {
     const fetchDefaultLocation = async () => {
       const defaultLocation = "St Louis"
@@ -25,6 +37,20 @@ catch (error) {
     }
     fetchDefaultLocation()
   }, [])
+
+const getLocalTime = () => {
+  if (!data.timezone) return "";
+
+  const localDate = new Date(Date.now() + data.timezone * 1000);
+  let hours = localDate.getUTCHours();
+  const minutes = localDate.getUTCMinutes();
+
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12; // convert 0 → 12
+
+  return `${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+};
+
 
   const search = async () => {
     
@@ -87,17 +113,26 @@ const handleInputChange = (e) => {
 
   return (
     <div className='weather'>
+      <div className="city-time">{getLocalTime()}</div>
       <div className="search">
         <div className="search-top">
           <i className="fa-solid fa-location-dot"></i>
           <div className="location">{data.name}</div>
+          
         </div>
         <div className="search-location">
-          <input type="text" placeholder='Enter Location' value={location} onChange={handleInputChange} />
+          <Input 
+           name = "location" 
+           type = "text"
+           placeholder="Enter Location"
+           value={location}
+           handleChange={handleInputChange}
+           ref={inputRef}
+          />
           <i className="fa-solid fa-magnifying-glass" onClick={search}></i>
         </div>
       </div>
-      {data.notFound ? (<div>Not Found 🙁</div>) : (
+      {data.notFound ? (<div>City Not Found 🙁</div>) : (
         <div className="weather-data">
         {data.weather && data.weather[0] && getWeatherIcon(data.weather[0].main)} 
         <div className="weather-type">{data.weather ? data.weather[0].main : null}</div>

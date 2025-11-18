@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import './ContactUs.css';
-import InputErrorMessage from './InputErrorMessage';
 import Input from './Input';
 import Select from './Select';
 import Button from './Button';
@@ -22,16 +21,6 @@ let initialData = {
   message: ''
 };
 
-let errorMessages = {
-  name: "Name is required.",
-  email: "Email is required.",
-  topic: "Please select a topic.",
-  message: "Message is required."
-};
-
-
-
-
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     ...initialData
@@ -43,18 +32,15 @@ const ContactUs = () => {
   const navigate = useNavigate();
 
   // Focus on the Name input when component mounts
-  useEffect(() => {
-    if (nameRef.current) {
+ useEffect(() => {
+    
       nameRef.current.focus();
-    }
+    
   }, []);
 
   const isValid = () => {
     return (
-      formData.name.trim() !== '' &&
-      formData.email.trim() !== '' &&
-      formData.topic.trim() !== '' &&
-      formData.message.trim() !== ''
+      formData.name && formData.email && formData.topic && formData.message
     );
   };
 
@@ -67,10 +53,11 @@ const ContactUs = () => {
     e.preventDefault();
     if (!isValid()) {
       setHasErrors(true);
-      return;
-    }
+      
+    } else {
     // Eventually: submit data to back end to save to database
     setSubmitted(true);
+    }
 
     console.log('Form submitted:', formData);
 
@@ -106,6 +93,7 @@ const ContactUs = () => {
       <p className="contact-subtext">
         Have questions or feedback? We'd love to hear from you!
       </p>
+
       <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <Input
@@ -113,30 +101,24 @@ const ContactUs = () => {
             name="name"
             label="Name"
             type="text"
+            placeholder='Enter Name'
             value={formData.name}
             handleChange={handleChange}
             ref={nameRef}
             required
           />
-          <InputErrorMessage
-            hasError={hasErrors && formData.name.trim() === ''}
-            msg={errorMessages.name}
-          />
-
         </div>
+
         <div className="form-group">
           <Input
             id="email"
             name="email"
+            placeholder='Enter Email'
             label="Email"
             type="email"
             value={formData.email}
             handleChange={handleChange}
             required
-          />
-          <InputErrorMessage
-            hasError={hasErrors && formData.email === ''}
-            msg={errorMessages.email}
           />
         </div>
 
@@ -149,33 +131,26 @@ const ContactUs = () => {
             options={dropdownOptions}
             required
           />
-          <InputErrorMessage
-            hasError={hasErrors && formData.topic === ''}
-            msg={errorMessages.topic}
-          />
         </div>
 
         <div className="form-group">
           <Textarea
             label="Message"
             name="message"
+            placeholder='Enter Message'
             value={formData.message}
             onChange={handleChange}
             rows="5"
             required
           />
-          <InputErrorMessage
-            hasError={hasErrors && formData.message === ''}
-            msg={errorMessages.message}
-          />
         </div>
+
         <div className="button-group">
           <Button
             id="Submit"
             type="submit"
             label="Submit"
             className="submit-btn"
-
           />
           <Button
             id='reset'
@@ -184,10 +159,9 @@ const ContactUs = () => {
             className="reset-btn"
             handleClick={handleReset}
           />
-
         </div>
-      </form>
 
+      </form>
     </div>
 
 
