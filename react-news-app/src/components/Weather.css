@@ -10,6 +10,7 @@
       justify-content: center;
       align-items: center;
       row-gap: 3rem;
+      position: relative;
 }
 
 .search {
@@ -96,6 +97,17 @@
       font-size: 2rem;
       color: #ddd;
 } 
+
+.city-time {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #eee;
+  opacity: 0.9;
+}
+
 
 .not-found {
   font-family: 'Comfortaa', sans-serif;

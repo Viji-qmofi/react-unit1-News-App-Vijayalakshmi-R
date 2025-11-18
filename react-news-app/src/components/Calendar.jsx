@@ -52,11 +52,18 @@ const Calendar = () => {
     <div className='calendar'>
       {/* Header with month, year and navigation buttons */}
       <div className="navigate-date">
+
+        <div className="buttons">
+          <i className="bx bx-chevrons-left" onClick={() => setCurrentYear(prev => prev - 1)}></i>
+          <i className="bx bx-chevron-left" onClick={prevMonth}></i>
+          
+        </div>
         <h2 className="month">{monthsOfYear[currentMonth]}</h2>
         <h2 className="year">{currentYear}</h2>
         <div className="buttons">
-          <i className="bx bx-chevron-left" onClick={prevMonth}></i>
+         
           <i className="bx bx-chevron-right" onClick={nextMonth}></i>
+          <i className="bx bx-chevrons-right" onClick={() => setCurrentYear(prev => prev + 1)}></i>
         </div>
       </div>
 

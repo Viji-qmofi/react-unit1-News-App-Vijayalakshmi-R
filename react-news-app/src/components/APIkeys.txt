@@ -9,3 +9,5 @@ Call for city : https://api.openweathermap.org/data/2.5/weather?q={city name}&ap
 City and Country : https://api.openweathermap.org/data/2.5/weather?q={city name},{country code}&appid={API key}
 City, State and Country : https://api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
 (only available for US states).
+
+aac789c1dbec48c4a51212531251811
