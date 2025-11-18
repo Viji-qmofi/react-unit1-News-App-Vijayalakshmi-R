@@ -71,20 +71,29 @@ const News = () => {
             setShowModal(true)
       }
 
+      /* Toggle bookmark state for an article.
+         If the article is already bookmarked → remove it.
+         If not → add it. Also sync changes to localStorage.*/
       const handleBookmarkClick = (article) => {
             setBookmarks((prevBookmarks) => {
-                  const updatedBookmarks = prevBookmarks.find((bookmark) => bookmark.title === article.title)
+                  const isAlreadyBookmarked = prevBookmarks.some(
+                        (bookmark) => bookmark.title === article.title
+                  );
+
+                  const updatedBookmarks = isAlreadyBookmarked
                         ? prevBookmarks.filter((bookmark) => bookmark.title !== article.title)
                         : [...prevBookmarks, article];
-                  localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
+
+                  localStorage.setItem("bookmarks", JSON.stringify(updatedBookmarks));
                   return updatedBookmarks;
-            })
-      }
+            });
+      };
 
 
-      /* ----------------------------------
-         UPDATE CATEGORY WHEN URL CHANGES
-      ---------------------------------- */
+
+      /* --------------------------------------------
+         Sync the selectedCategory with the URL param.
+      --------------------------------------------- */
       useEffect(() => {
             if (category) {
                   setSelectedCategory(categoryMap[category] || "general");
@@ -99,7 +108,7 @@ const News = () => {
       useEffect(() => {
             const fetchNews = async () => {
                   try {
-                        const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=fd5e0b213976ff502f9e0ef25a8c7b93`;
+                        const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=e594a198a130f391ac23bccfbced3fa8`;
 
                         const response = await fetch(url);
 
@@ -107,6 +116,7 @@ const News = () => {
 
                         const data = await response.json();
                         const fetchedNews = data.articles || [];
+                        {/*console.log(fetchedNews)*/ }
 
                         fetchedNews.forEach((article) => {
                               if (!article.image) article.image = noImg;
@@ -258,8 +268,8 @@ const News = () => {
 
                                     <a
                                           href={selectedArticle.url}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
+                                          target="_blank" //opens article in new tab
+                                          rel="noopener noreferrer" // security feature which will not trigger window.opener
                                           className="read-more-link"
                                     >
                                           Read More
