@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router'
 import './App.css'
-import News from './components/News'
-import ContactUs from './components/ContactUs'
-import Footer from './components/Footer'
-import Header from './components/Header'
+import News from './components/Pages/News/News'
+import ContactUs from './components/Pages/Contact/ContactUs'
+import Footer from './components/Common/Footer'
+import Header from './components/Common/Header'
 
 function App() {
 
