@@ -54,7 +54,6 @@ const News = () => {
       const location = useLocation();
 
 
-
       const handleOpenModal = (article) => {
             setSelectedArticle(article);
             {/*console.log(article);*/ }
@@ -89,8 +88,6 @@ const News = () => {
             });
       };
 
-
-
       /* --------------------------------------------
          Sync the selectedCategory with the URL param.
       --------------------------------------------- */
@@ -108,7 +105,7 @@ const News = () => {
       useEffect(() => {
             const fetchNews = async () => {
                   try {
-                        const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=fd5e0b213976ff502f9e0ef25a8c7b93`;
+                        const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=e594a198a130f391ac23bccfbced3fa8`;
 
                         const response = await fetch(url);
 
@@ -154,11 +151,9 @@ const News = () => {
             setShowBookmarksModal(location.pathname === "/bookmarks");
       }, [location.pathname]);
 
-
-
       return (
             <div className="news-content">
-                  {/* ---------------- NAVBAR ---------------- */}
+                  {/* ---------------- NavBar ---------------- */}
                   <div className="navbar">
                         <div className="user">
                               <img src={userImg} alt="User" />
@@ -166,6 +161,7 @@ const News = () => {
                         </div>
 
                         <nav className="categories">
+                              {/* ---------------- Categories Links ---------------- */}
                               <div className="nav-links">
                                     {categories.map((cat) => (
                                           <Link
@@ -177,11 +173,13 @@ const News = () => {
                                                 {cat === "home" ? "Home" : cat}
                                           </Link>
                                     ))}
+
+                                    {/* ---------------- BookMarks Link ---------------- */}
                                     <Link to="/bookmarks" className="nav-link">
                                           Bookmarks <i className="fa-solid fa-bookmark"></i>
                                     </Link>
 
-
+                                    {/* ---------------- Contact Us Link ---------------- */}
                                     <Link to="/contactus" className="nav-link">Contact Us</Link>
                               </div>
                         </nav>
@@ -231,6 +229,8 @@ const News = () => {
                               ))}
                         </div>
                   </div>
+                  
+                  {/* ---------------- MODAL ---------------- */}
                   <Modal show={showModal} onClose={handleCloseModal}>
 
                         {selectedArticle ? (
@@ -277,7 +277,8 @@ const News = () => {
                               </>
                         ) : null}
                   </Modal>
-
+                  
+                  {/* ---------------- BOOKMARKS ---------------- */}
                   <BookMarks
                         show={showBookmarksModal}
                         bookmarks={bookmarks}
@@ -295,8 +296,6 @@ const News = () => {
                         }}
                         onDeleteBookmark={handleBookmarkClick}
                   />
-
-
 
                   {/* ---------------- WEATHER + CALENDAR ---------------- */}
                   <div className="weather-calendar">
