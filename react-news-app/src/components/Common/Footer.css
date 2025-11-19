@@ -1,7 +1,7 @@
 .news-footer {
       width: 100%;
       min-height: 5.5rem;
-      background-image: url('../assets/images/news.jpg'); /* Define your colors */
+      background-image: url('../../assets/images/news.jpg'); /* Define your colors */
       border-radius: 0 0 1rem 1rem;
       display: flex;
       align-items: center;

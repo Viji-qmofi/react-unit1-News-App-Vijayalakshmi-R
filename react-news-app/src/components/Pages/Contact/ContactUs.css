@@ -57,7 +57,7 @@
   flex-direction: column;
 }
 
-/* Label + Required mark */
+
 .contact-form label {
   color: #ddd;
   font-family: "Babas Neue", sans-serif;
@@ -66,14 +66,12 @@
 }
 
 
-
 .contact-form label .required {
   color: red !important;
   margin-left: 0.2rem;
 }
 
 
-/* Inputs and Textareas */
 .contact-form input,
 .contact-form textarea {
   padding: 0.8rem 1rem;
@@ -137,21 +135,28 @@
   outline: none;
 }
 
-/* Custom dropdown options */
+
 .contact-form select option {
   color: #111 !important;
   background-color: #fff !important;
 }
 
-/* Remove Chrome blue highlight (forced white text) */
+
 .contact-form select option:hover {
   background-color: #e5f0ff !important;
   color: #000 !important;
 }
 
+.error-text {
+  color: #e63946;
+  font-size: 1rem;
+  margin-top: 4px;
+}
 
+.error-input {
+  border: 2px solid #e63946 !important;
+}
 
-/* === BUTTONS === */
 .button-group {
   display: flex;
   gap: 1rem;
@@ -210,35 +215,12 @@
   transform: scale(1.05);
 }
 
-/* === FOOTER === */
-.news-footer {
-  background-color: #111214;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 4rem;
-  font-size: 0.9rem;
-  margin-top: auto;
-  width: 100%;
-  border-radius: 0 0 1rem 1rem;
-}
-
-.news-footer p {
-  margin: 0;
-}
-
-.news-footer span {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 1.8rem;
-  letter-spacing: 0.5px;
-}
 
 /* ==========================================================
    📱 RESPONSIVE BREAKPOINTS
    ========================================================== */
 
-/* === 1. MOBILE: up to 480px === */
+
 @media (max-width: 480px) {
   .contact-wrapper {
     background: linear-gradient(135deg, #eef3f8, #d9e4ec);
@@ -275,7 +257,6 @@
   }
 }
 
-/* === 2. TABLET: 601px to 1024px === */
 @media (max-width: 768px) {
    .contact-wrapper {
     background: linear-gradient(135deg, #517293, #d9e4ec);
@@ -299,7 +280,7 @@
   }
 }
 
-/* === 3. DESKTOP: above 1024px === */
+
 @media (max-width: 1024px) {
   .contact-form {
     max-width: 550px;

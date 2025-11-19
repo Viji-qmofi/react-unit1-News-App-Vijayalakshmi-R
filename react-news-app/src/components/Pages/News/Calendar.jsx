@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Calendar.css'
 
 const Calendar = () => {
-  // Weekday and month labels used for rendering
+
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   const monthsOfYear = [
     'January',
@@ -19,17 +19,16 @@ const Calendar = () => {
     'December',
   ]
 
-  // Today's real date (used for highlighting current day)
   const currentDate = new Date()
 
-  // Track the month & year currently being displayed
+
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
 
-  // Total number of days in the current month
+
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-  // Day of the week the month starts on (0 = Sunday)
+
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
 
@@ -56,18 +55,18 @@ const Calendar = () => {
         <div className="buttons">
           <i className="bx bx-chevrons-left" onClick={() => setCurrentYear(prev => prev - 1)}></i>
           <i className="bx bx-chevron-left" onClick={prevMonth}></i>
-          
         </div>
+
         <h2 className="month">{monthsOfYear[currentMonth]}</h2>
         <h2 className="year">{currentYear}</h2>
+
         <div className="buttons">
-         
           <i className="bx bx-chevron-right" onClick={nextMonth}></i>
           <i className="bx bx-chevrons-right" onClick={() => setCurrentYear(prev => prev + 1)}></i>
         </div>
+
       </div>
 
-      {/* Display weekday names */}
       <div className="weekdays">
         {daysOfWeek.map((day) => (
           <span key={day}>{day}</span>
@@ -83,10 +82,11 @@ const Calendar = () => {
         {/* Actual days */}
         {Array.from({ length: daysInMonth }, (_, i) => {
           const dayNumber = i + 1;
+          
           const isToday =
-            dayNumber === currentDate.getDate() &&
-            currentMonth === currentDate.getMonth() &&
-            currentYear === currentDate.getFullYear();
+          dayNumber === currentDate.getDate() &&
+          currentMonth === currentDate.getMonth() &&
+          currentYear === currentDate.getFullYear();
 
           return (
             <span key={dayNumber} className={isToday ? 'current-day' : ''}>

@@ -45,7 +45,7 @@
 }
 
 .buttons i:hover {
-  transform: scale(1.12);
+      transform: scale(1.12);
 }
 
 .weekdays {
@@ -63,7 +63,7 @@
       color: #78879e;
       letter-spacing: 0.1rem;
       display: flex;
-      justify-content: center;      
+      justify-content: center;
 }
 
 .days {
@@ -87,24 +87,24 @@
 /* override to make the current-day a circle */
 .days span.current-day {
       font-size: 2rem !important;
-      width: 2.6rem;          /* match this to height for a perfect circle */
+      width: 2.6rem;
       height: 2.6rem;
-      min-width: 2.6rem;      /* prevent it shrinking */
+      min-width: 2.6rem;
       background: linear-gradient(to right, #b88efc, #6877f4);
       color: #fff;
       border-radius: 50%;
-      margin: 0.15rem auto;   /* center horizontally within cell, give slight vertical offset */
+      margin: 0.15rem auto;
       display: inline-flex;
       align-items: center;
       justify-content: center;
 }
 
 .days span.current-day:hover {
-  transform: scale(1.12);
+      transform: scale(1.12);
 }
 
 @media (max-width: 768px) {
-  .calendar {
-    height: 100%;
-  }
+      .calendar {
+            height: 100%;
+      }
 }
