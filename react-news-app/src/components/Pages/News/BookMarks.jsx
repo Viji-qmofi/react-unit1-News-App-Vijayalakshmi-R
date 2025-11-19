@@ -1,7 +1,7 @@
 // BookMarks.jsx
 import React from "react";
-import Modal from "./Modal";
-import noImg from "../assets/images/no-Img.png";
+import Modal from "./Modals/Modal";
+import noImg from "../../../assets/images/no-img.png";
 import "./Bookmarks.css";
 
 const BookMarks = ({ show, bookmarks, onClose, onSelectArticle, onDeleteBookmark }) => {

@@ -1,9 +1,1 @@
 
-
-main {
-    flex: 1;
-}
-
-.main-content {
-    padding: 10px clamp(20px, 4vw, 30px) 20px;
-}
