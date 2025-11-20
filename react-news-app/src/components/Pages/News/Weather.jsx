@@ -6,7 +6,7 @@ const Weather = () => {
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
   const [localTime, setLocalTime] = useState("");
-  const [shouldRefocus, setShouldRefocus] = useState(false); 
+  const [shouldRefocus, setShouldRefocus] = useState(false);
   const inputRef = useRef(null);
 
   useEffect(() => {

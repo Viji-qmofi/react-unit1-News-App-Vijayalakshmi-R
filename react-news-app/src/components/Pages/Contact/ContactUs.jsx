@@ -119,7 +119,7 @@ const ContactUs = () => {
       </p>
 
       <form className="contact-form" onSubmit={handleSubmit} noValidate>
-        
+
         {/* NAME */}
         <div className="form-group">
           <Input
