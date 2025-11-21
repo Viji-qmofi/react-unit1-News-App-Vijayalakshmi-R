@@ -1,4 +1,4 @@
 [build]
-base = “<project-directory>”
+base = “<react-news-app>”
 command = “npm run build”
 publish = “dist”
