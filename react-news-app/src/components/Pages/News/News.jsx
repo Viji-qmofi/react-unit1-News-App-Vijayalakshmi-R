@@ -7,7 +7,7 @@ import BookMarks from "./BookMarks";
 import Weather from "./Weather";
 import Calendar from "./Calendar";
 import userImg from "../../../assets/images/user.jpg";
-import noImg from "../../../assets/images/no-Img.png";
+import noImg from "../../../assets/images/no-img.png";
 import Loader from "../../Common/Loader";
 
 /* ----------------------------------
