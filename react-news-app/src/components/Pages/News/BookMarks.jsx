@@ -2,7 +2,7 @@
 import React from "react";
 import Modal from "./Modals/Modal";
 import noImg from "../../../assets/images/no-img.png"; 
-import "./Bookmarks.css";
+import "./BookMarks.css";
 
 const BookMarks = ({
   show,
