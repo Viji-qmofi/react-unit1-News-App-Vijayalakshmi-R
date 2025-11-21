@@ -71,6 +71,26 @@
   }
 }
 
+.weather-clear .weather-data i {
+  animation: moon-glow 3s infinite ease-in-out;
+  color: #ffc87c;
+}
+
+@keyframes moon-glow {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.15);
+    filter: brightness(1.4);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
 .weather-clouds .weather-data i {
   animation: cloud-float 4s infinite ease-in-out;
 }
@@ -222,6 +242,7 @@
   right: 1rem;
   font-size: 1.8rem;
   color: #fff;
+  cursor: pointer;
 }
 
 .weather-data {

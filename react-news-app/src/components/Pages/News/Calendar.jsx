@@ -27,15 +27,12 @@ const Calendar = () => {
 
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
+  
 
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
 
-  {/*console.log(currentMonth, currentYear, daysInMonth, firstDayOfMonth)*/ }
-
-
-  // Go to previous month (if January → go to December and reduce year)
+    // Go to previous month (if January → go to December and reduce year)
   const prevMonth = () => {
     setCurrentMonth((prevMonth) => (prevMonth === 0 ? 11 : prevMonth - 1));
     setCurrentYear((prevYear) => (currentMonth === 0 ? prevYear - 1 : prevYear));
@@ -43,8 +40,8 @@ const Calendar = () => {
 
   // Go to next month (if December → go to January and increase year)
   const nextMonth = () => {
-    setCurrentMonth((prevMonth) => (prevMonth === 11 ? 0 : prevMonth + 1));
-    setCurrentYear((prevYear) => (currentMonth === 11 ? prevYear + 1 : prevYear));
+    setCurrentMonth((nextMonth) => (nextMonth === 11 ? 0 : nextMonth + 1));
+    setCurrentYear((nextYear) => (currentMonth === 11 ? currentYear + 1 : currentYear));
   }
 
   return (
@@ -62,7 +59,7 @@ const Calendar = () => {
 
         <div className="buttons">
           <i className="bx bx-chevron-right" onClick={nextMonth}></i>
-          <i className="bx bx-chevrons-right" onClick={() => setCurrentYear(prev => prev + 1)}></i>
+          <i className="bx bx-chevrons-right" onClick={() => setCurrentYear(next => next + 1)}></i>
         </div>
 
       </div>

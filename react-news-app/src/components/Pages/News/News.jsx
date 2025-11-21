@@ -48,11 +48,25 @@ const News = () => {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [bookmarks, setBookmarks] = useState([]);
   const [showBookmarksModal, setShowBookmarksModal] = useState(false);
-  const [lastPage, setLastPage] = useState("/categories/home");
+  const [lastVisitedPage, setLastVisitedPage] = useState("/categories/home");
 
   const { category } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+
+  /* ----------------------------------
+    EARLY REDIRECT FOR INVALID CATEGORY
+  ---------------------------------- */
+  useEffect(() => {
+    if (
+      category &&
+      !categoryMap[category] &&
+      location.pathname !== "/bookmarks"
+    ) {
+      navigate("/categories/home", { replace: true });
+    }
+  }, [category, location.pathname, navigate]);
+
 
   /* -------------------------------
      Open / Close Article Modal
@@ -83,28 +97,20 @@ const News = () => {
     });
   };
 
-  /* --------------------------------------------
-     Sync selectedCategory with URL
-  --------------------------------------------- */
+  /*  Sync selectedCategory with URL (only map)  */
   useEffect(() => {
-    // Skip category sync when inside bookmarks route
     if (location.pathname === "/bookmarks") return;
 
-    if (!category || !categoryMap[category]) {
-      setSelectedCategory("general");
-      navigate("/categories/home", { replace: true }); // redirect to home
-    } else {
+    if (categoryMap[category]) {
       setSelectedCategory(categoryMap[category]);
     }
-  }, [category, navigate, location.pathname]);
+  }, [category, location.pathname]);
 
-  /* ----------------------------------
-     Fetch News
-  ---------------------------------- */
+  /*     Fetch News   */
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=e594a198a130f391ac23bccfbced3fa8`;
+        const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=fd5e0b213976ff502f9e0ef25a8c7b93`;
 
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
@@ -136,32 +142,26 @@ const News = () => {
     fetchNews();
   }, [selectedCategory]);
 
-  /* ----------------------------------
-     Track Last Page Before Bookmarks
-  ---------------------------------- */
+  /* Track Last Page Before Bookmarks */
   useEffect(() => {
     if (location.pathname !== "/bookmarks") {
-      setLastPage(location.pathname);
+      setLastVisitedPage(location.pathname);
     }
   }, [location.pathname]);
 
-  /* ----------------------------------
-     Sync Bookmarks Modal With Route
-  ---------------------------------- */
+  /* Sync Bookmarks Modal With Route  */
   useEffect(() => {
     setShowBookmarksModal(location.pathname === "/bookmarks");
   }, [location.pathname]);
 
-  /* ----------------------------------
-     RENDER
-  ---------------------------------- */
+  /* RENDER  */
   return (
     <div className="news-content">
-      
+
       {/* ---------------- NAVBAR ---------------- */}
       <div className="navbar">
         <div className="user">
-          <img src={userImg} alt="User" />
+          <img src={userImg} alt="User Image" />
           <p>Anna's Page</p>
         </div>
 
@@ -171,9 +171,8 @@ const News = () => {
               <Link
                 key={cat}
                 to={`/categories/${cat}`}
-                className={`nav-link ${
-                  selectedCategory === categoryMap[cat] ? "active-category" : ""
-                }`}
+                className={`nav-link ${selectedCategory === categoryMap[cat] ? "active-category" : ""
+                  }`}
               >
                 {cat === "home" ? "Home" : cat}
               </Link>
@@ -200,11 +199,10 @@ const News = () => {
               {headline.title}
 
               <i
-                className={`${
-                  bookmarks.some((b) => b.title === headline.title)
+                className={`${bookmarks.some((b) => b.title === headline.title)
                     ? "fa-solid"
                     : "fa-regular"
-                } fa-bookmark bookmark`}
+                  } fa-bookmark bookmark`}
                 onClick={(e) => {
                   e.stopPropagation();
                   handleBookmarkClick(headline);
@@ -229,11 +227,10 @@ const News = () => {
               <h3>
                 {article.title}
                 <i
-                  className={`${
-                    bookmarks.some((b) => b.title === article.title)
+                  className={`${bookmarks.some((b) => b.title === article.title)
                       ? "fa-solid"
                       : "fa-regular"
-                  } fa-bookmark bookmark`}
+                    } fa-bookmark bookmark`}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleBookmarkClick(article);
@@ -264,12 +261,12 @@ const News = () => {
             <p className="modal-date">
               {selectedArticle.publishedAt
                 ? new Date(selectedArticle.publishedAt).toLocaleString("en-us", {
-                    month: "short",
-                    day: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })
+                  month: "short",
+                  day: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
                 : ""}
             </p>
 
@@ -295,9 +292,9 @@ const News = () => {
       <BookMarks
         show={showBookmarksModal}
         bookmarks={bookmarks}
-        onClose={() => navigate(lastPage)}
+        onClose={() => navigate(lastVisitedPage)}
         onSelectArticle={(article) => {
-          navigate(lastPage);
+          navigate(lastVisitedPage);
           setTimeout(() => handleOpenModal(article), 50);
         }}
         onDeleteBookmark={handleBookmarkClick}
