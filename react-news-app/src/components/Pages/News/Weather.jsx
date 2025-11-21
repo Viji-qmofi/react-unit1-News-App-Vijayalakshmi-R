@@ -66,12 +66,12 @@ const Weather = () => {
       if (!response.ok) {
         setData({ notFound: true });
         setLocation("");
-        setShouldRefocus(true); // 👈 ensures cursor returns
+        setShouldRefocus(true); // ensures cursor returns
       } else {
         const weatherData = await response.json();
         setData(weatherData);
         setLocation("");
-        setShouldRefocus(true); // 👈 ensures cursor returns
+        setShouldRefocus(true); // ensures cursor returns
       }
     } catch (error) {
       console.error("Search error:", error);
@@ -90,18 +90,46 @@ const Weather = () => {
     }
   }, [shouldRefocus]);
 
-  const getWeatherIcon = (type) => {
-    switch (type) {
-      case "Clear": return <i className="bx bxs-sun"></i>;
-      case "Clouds": return <i className="bx bxs-cloud"></i>;
-      case "Rain": return <i className="bx bxs-cloud-rain"></i>;
-      case "Thunderstorm": return <i className="bx bxs-cloud-lightning"></i>;
-      case "Snow": return <i className="bx bxs-cloud-snow"></i>;
-      case "Mist":
-      case "Haze": return <i className="bx bxs-cloud"></i>;
-      default: return <i className="bx bxs-cloud"></i>;
+  const getWeatherIcon = (weatherMain, timezoneOffset) => {
+    if (!weatherMain || !timezoneOffset) return <i className="bx bx-cloud"></i>;
+
+    // Convert to consistent casing
+    const type = weatherMain.toLowerCase();
+
+    // Compute city local hour
+    const localDate = new Date(Date.now() + timezoneOffset * 1000);
+    const hour = localDate.getUTCHours();
+    const isDay = hour >= 6 && hour < 18;
+
+    if (type === "clear") {
+      return isDay
+        ? <i className="bx bxs-sun"></i>
+        : <i className="bx bx-moon"></i>;
     }
+
+    if (type === "clouds") {
+      return <i className="bx bx-cloud"></i>;
+    }
+
+    if (type === "rain") {
+      return <i className="bx bxs-cloud-rain"></i>;
+    }
+
+    if (type === "thunderstorm") {
+      return <i className="bx bxs-cloud-lightning"></i>;
+    }
+
+    if (type === "snow") {
+      return <i className="bx bxs-cloud-snow"></i>;
+    }
+
+    if (type === "mist" || type === "haze") {
+      return <i className="bx bx-cloud"></i>;
+    }
+
+    return <i className="bx bx-cloud"></i>;
   };
+
 
   const weatherMain = data.weather ? data.weather[0].main.toLowerCase() : "";
   const isRain = weatherMain === "rain";
@@ -153,7 +181,8 @@ const Weather = () => {
         <div className="not-found">City Not Found 🙁</div>
       ) : (
         <div className="weather-data">
-          {data.weather && getWeatherIcon(data.weather[0].main)}
+          {data.weather && getWeatherIcon(data.weather[0].main, data.timezone)}
+
           <div className="weather-type">{data.weather?.[0].main}</div>
           <div className="temp">{data.main && `${Math.floor(data.main.temp)}°`}</div>
         </div>

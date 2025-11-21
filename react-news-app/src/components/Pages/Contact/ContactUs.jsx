@@ -81,7 +81,6 @@ const ContactUs = () => {
     }
 
     setSubmitted(true);
-    console.log("Form submitted:", formData);
   };
 
   const handleReset = () => {
