@@ -1,7 +1,7 @@
 export const handler = async (event) => {
   const { category } = event.queryStringParameters;
 
-  const API_KEY = process.env.fbf5f36da38f7441eb62560033d46f86;
+  const API_KEY = process.env.GNEWS_API_KEY;
   const url = `https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&country=us&apikey=${API_KEY}`;
 
   try {
