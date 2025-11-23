@@ -201,7 +201,7 @@
       
 @media (max-width: 1024px) {
    .nav-links {
-      row-gap: 3rem;
+      row-gap: 2rem;
     }  
     
     .news-section {
@@ -214,7 +214,7 @@
       overflow-y: scroll;
     }
 
-    .news-grid::-webkit-scrollbar {
+    .news-grid ::-webkit-scrollbar {
       display: none;
     }   
 }
@@ -255,6 +255,8 @@
     align-items: center;
     row-gap: 1rem;
   }
+
+ 
 
   .nav-links {
     flex-direction: row;
