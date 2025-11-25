@@ -112,7 +112,7 @@ const News = () => {
       try {
         const url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&country=us&apikey=fbf5f36da38f7441eb62560033d46f86`;
 
-        const response = await fetch(`/.netlify/functions/getNews?category=${selectedCategory}`);
+        const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
         const data = await response.json();
