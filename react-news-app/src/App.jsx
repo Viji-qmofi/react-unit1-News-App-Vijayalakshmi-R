@@ -16,7 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<News />} />
             <Route path="/categories/:category" element={<News />} />
-            <Route path="/bookmarks" element={<News showBookmarksFromRoute={true} />} />
+            <Route path="/bookmarks" element={<News />} />
             <Route path="/contactus" element={<ContactUs />} />
           </Routes>
           <Footer />
